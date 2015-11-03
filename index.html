@@ -19,18 +19,15 @@
     </section>
 
     <section class="main-content">
-      <p align="center">
-  ActiveInteraction manages application-specific business logic.
-  It's an implementation of the command pattern in Ruby.
-</p>
+      <p>ActiveInteraction manages application-specific business logic.
+It's an implementation of the command pattern in Ruby.</p>
 
-<p align="center">
-  <a href="https://rubygems.org/gems/active_interaction"><img alt="Version" src="https://img.shields.io/gem/v/active_interaction.svg?label=version&amp;style=flat-square"></a>
-  <a href="https://travis-ci.org/orgsync/active_interaction"><img alt="Build" src="https://img.shields.io/travis/orgsync/active_interaction/master.svg?label=build&amp;style=flat-square"></a>
-  <a href="https://coveralls.io/r/orgsync/active_interaction"><img alt="Coverage" src="https://img.shields.io/coveralls/orgsync/active_interaction/master.svg?label=coverage&amp;style=flat-square"></a>
-  <a href="https://codeclimate.com/github/orgsync/active_interaction"><img alt="Climate" src="https://img.shields.io/codeclimate/github/orgsync/active_interaction.svg?label=climate&amp;style=flat-square"></a>
-  <a href="https://gemnasium.com/orgsync/active_interaction"><img alt="Dependencies" src="https://img.shields.io/gemnasium/orgsync/active_interaction.svg?label=dependencies&amp;style=flat-square"></a>
-</p>
+<p><a href="https://rubygems.org/gems/active_interaction"><img src="https://img.shields.io/gem/v/active_interaction.svg?label=version" alt="Version"></a>
+<a href="https://travis-ci.org/orgsync/active_interaction"><img src="https://img.shields.io/travis/orgsync/active_interaction/master.svg?label=build" alt="Build"></a>
+<a href="https://coveralls.io/r/orgsync/active_interaction"><img src="https://img.shields.io/coveralls/orgsync/active_interaction/master.svg?label=coverage" alt="Coverage"></a>
+<a href="https://codeclimate.com/github/orgsync/active_interaction"><img src="https://img.shields.io/codeclimate/github/orgsync/active_interaction.svg?label=climate" alt="Climate"></a>
+<a href="http://www.libgrader.com/libraries/ruby/active_interaction"><img src="https://img.shields.io/badge/grade-A-brightgreen.svg" alt="Grade"></a>
+<a href="https://gemnasium.com/orgsync/active_interaction"><img src="https://img.shields.io/gemnasium/orgsync/active_interaction.svg?label=dependencies" alt="Dependencies"></a></p>
 
 <hr>
 
@@ -324,7 +321,7 @@ have a name.</p>
 <h3>
 <a id="file" class="anchor" href="#file" aria-hidden="true"><span class="octicon octicon-link"></span></a>File</h3>
 
-<p>File filters also accept <code>TempFile</code>s and anything that responds to <code>#tempfile</code>.
+<p>File filters also accept <code>TempFile</code>s and anything that responds to <code>#rewind</code>.
 That means that you can pass the <code>params</code> from uploading files via forms in
 Rails.</p>
 
@@ -627,7 +624,8 @@ the appropriate method from <code>Kernel</code> (like <code>.Float</code>).</p>
 <p>ActiveInteraction plays nicely with Rails. You can use interactions to handle
 your business logic instead of models or controllers. To see how it all works,
 let's take a look at a complete example of a controller with the typical
-resourceful actions.</p>
+resourceful actions. For a complete working example, check out <a href="example">Aire</a>, our
+example Rails application.</p>
 
 <h3>
 <a id="controller" class="anchor" href="#controller" aria-hidden="true"><span class="octicon octicon-link"></span></a>Controller</h3>
@@ -1143,7 +1141,7 @@ input type.</p>
 <a id="optional-inputs" class="anchor" href="#optional-inputs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optional inputs</h3>
 
 <p>Optional inputs can be defined by using the <code>:default</code> option as described in
-<a href="#filters">the Filters section</a>. Within the interaction, provided and default values
+<a href="#filters">the filters section</a>. Within the interaction, provided and default values
 are merged to create <code>inputs</code>. There are times where it is useful to know
 whether a value was passed to <code>run</code> or the result of a filter default. In
 particular, it is useful when <code>nil</code> is an acceptable value. For example, you
@@ -1167,17 +1165,23 @@ it out of the hash. If you want to remove their birthday, set <code>birthday: ni
 And if you want to update it, pass in the new value as usual.</p>
 
 <div class="highlight highlight-source-ruby"><pre>user <span class="pl-k">=</span> <span class="pl-c1">User</span>.find(...)
+
 <span class="pl-c"># Don't update their birthday.</span>
 <span class="pl-c1">UpdateUser</span>.run!(<span class="pl-c1">user:</span> user)
+
 <span class="pl-c"># Remove their birthday.</span>
 <span class="pl-c1">UpdateUser</span>.run!(<span class="pl-c1">user:</span> user, <span class="pl-c1">birthday:</span> <span class="pl-c1">nil</span>)
+
 <span class="pl-c"># Update their birthday.</span>
 <span class="pl-c1">UpdateUser</span>.run!(<span class="pl-c1">user:</span> user, <span class="pl-c1">birthday:</span> <span class="pl-c1">Date</span>.<span class="pl-k">new</span>(<span class="pl-c1">2000</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>))</pre></div>
 
 <h3>
 <a id="predicates" class="anchor" href="#predicates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Predicates</h3>
 
-<p>ActiveInteraction creates a predicate method for every input defined by a filter. So if you have an input called <code>foo</code>, there will be a predicate method called <code>#foo?</code>. That method will tell you if the input was given (that is, if it was not <code>nil</code>).</p>
+<p>ActiveInteraction creates a predicate method for every input defined by a
+filter. So if you have an input called <code>foo</code>, there will be a predicate method
+called <code>#foo?</code>. That method will tell you if the input was given (that is, if
+it was not <code>nil</code>).</p>
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">SayHello<span class="pl-e"> &lt; ActiveInteraction::Base</span></span>
   string <span class="pl-c1">:name</span>,
@@ -1196,6 +1200,9 @@ And if you want to update it, pass in the new value as usual.</p>
 <span class="pl-c"># =&gt; "Howdy, stranger!"</span>
 <span class="pl-c1">SayHello</span>.run!(<span class="pl-c1">name:</span> <span class="pl-s"><span class="pl-pds">'</span>Taylor<span class="pl-pds">'</span></span>)
 <span class="pl-c"># =&gt; "Hello, Taylor!"</span></pre></div>
+
+<p>See <a href="#optional-inputs">the optional inputs section</a> for help on determining if an input was
+present in the input hash instead of just <code>nil</code>.</p>
 
 <h3>
 <a id="translations" class="anchor" href="#translations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Translations</h3>
@@ -1256,8 +1263,6 @@ by <a href="https://github.com/cypriss">Jonathan Novak</a> on <a href="https://g
 available on GitHub.</p>
 
 <p>ActiveInteraction is licensed under <a href="LICENSE.md">the MIT License</a>.</p>
-
-<p>Logo design by <a href="https://github.com/tylerlee">Tyler Lee</a>.</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/orgsync/active_interaction">ActiveInteraction</a> is maintained by <a href="https://github.com/orgsync">orgsync</a>.</span>
