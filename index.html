@@ -123,18 +123,20 @@ handles your verbs.</p>
 
 <p>Add it to your Gemfile:</p>
 
-<div class="highlight highlight-source-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>active_interaction<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>~&gt; 2.2<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>active_interaction<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>~&gt; 3.0<span class="pl-pds">'</span></span></pre></div>
 
 <p>Or install it manually:</p>
 
-<div class="highlight highlight-source-shell"><pre>$ gem install active_interaction --version <span class="pl-s"><span class="pl-pds">'</span>~&gt; 2.2<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-source-shell"><pre>$ gem install active_interaction --version <span class="pl-s"><span class="pl-pds">'</span>~&gt; 3.0<span class="pl-pds">'</span></span></pre></div>
 
 <p>This project uses <a href="http://semver.org/spec/v2.0.0.html">Semantic Versioning</a>. Check out <a href="CHANGELOG.md">the change log</a> for a
 detailed list of changes. For help upgrading to version 2, please read <a href="http://devblog.orgsync.com/2015/05/06/announcing-active-interaction-2/">the
 announcement post</a>.</p>
 
-<p>ActiveInteraction works with all supported versions of Ruby (2.0 through 2.2)
-and ActiveModel (3.2 through 4.2).</p>
+<p>ActiveInteraction works with all supported versions of Ruby (2.0 through 2.3)
+and ActiveModel (4.0 through 4.2).</p>
+
+<p>If you want to use ActiveInteraction with Ruby &lt; 2.0.0 or ActiveModel &lt; 4.0.0, use ActiveInteraction &lt; 3.0.0.</p>
 
 <h2>
 <a id="basic-usage" class="anchor" href="#basic-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic usage</h2>
@@ -875,7 +877,7 @@ edit page.</p>
 
 <p>We recommend putting your interactions in <code>app/interactions</code>. It's also very
 helpful to group them by model. That way you can look in
-<code>app/interactions/accounts</code> for all the ways you can interact with accounts.<br>
+<code>app/interactions/accounts</code> for all the ways you can interact with accounts.
 In order to use this structure add <code>config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")</code> in your <code>application.rb</code></p>
 
 <pre><code>- app/
@@ -978,6 +980,9 @@ with <code>inputs</code>, delegating to another interaction is a piece of cake.<
     compose(<span class="pl-c1">Add</span>, inputs) <span class="pl-k">*</span> <span class="pl-c1">2</span>
   <span class="pl-k">end</span>
 <span class="pl-k">end</span></pre></div>
+
+<p>Note that errors in composed interactions have a few tricky cases. See <a href="#errors">the
+errors section</a> for more information about them.</p>
 
 <h3>
 <a id="defaults" class="anchor" href="#defaults" aria-hidden="true"><span class="octicon octicon-link"></span></a>Defaults</h3>
@@ -1086,6 +1091,40 @@ itself. By using the <code>#merge!</code> helper on <code>errors</code>, you can
     thing
   <span class="pl-k">end</span>
 <span class="pl-k">end</span></pre></div>
+
+<p>When a composed interaction fails, its errors are merged onto the caller. This
+generally produces good error messages, but there are a few cases to look out
+for.</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">Inner<span class="pl-e"> &lt; ActiveInteraction::Base</span></span>
+  boolean <span class="pl-c1">:x</span>, <span class="pl-c1">:y</span>
+<span class="pl-k">end</span>
+
+<span class="pl-k">class</span> <span class="pl-en">Outer<span class="pl-e"> &lt; ActiveInteraction::Base</span></span>
+  string <span class="pl-c1">:x</span>
+  boolean <span class="pl-c1">:z</span>, <span class="pl-c1">default:</span> <span class="pl-c1">nil</span>
+
+  <span class="pl-k">def</span> <span class="pl-en">execute</span>
+    compose(<span class="pl-c1">Inner</span>, <span class="pl-c1">x:</span> x, <span class="pl-c1">y:</span> z)
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span>
+
+outcome <span class="pl-k">=</span> <span class="pl-c1">Outer</span>.run(<span class="pl-c1">x:</span> <span class="pl-s"><span class="pl-pds">'</span>yes<span class="pl-pds">'</span></span>)
+outcome.errors.details
+<span class="pl-c"># =&gt; { :x    =&gt; [{ :error =&gt; :invalid_type, :type =&gt; "boolean" }],</span>
+<span class="pl-c">#      :base =&gt; [{ :error =&gt; "Y is required" }] }</span>
+outcome.errors.full_messages.join(<span class="pl-s"><span class="pl-pds">'</span> and <span class="pl-pds">'</span></span>)
+<span class="pl-c"># =&gt; "X is not a valid boolean and Y is required"</span></pre></div>
+
+<p>Since both interactions have an input called <code>x</code>, the inner error for that
+input is moved to the <code>x</code> error on the outer interaction. This results in a
+misleading error that claims the input <code>x</code> is not a valid boolean even though
+it's a string on the outer interaction.</p>
+
+<p>Since only the inner interaction has an input called <code>y</code>, the inner error for
+that input is moved to the <code>base</code> error on the outer interaction. This results
+in a confusing error that claims the input <code>y</code> is required even though it's not
+present on the outer interaction.</p>
 
 <h3>
 <a id="forms" class="anchor" href="#forms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Forms</h3>
