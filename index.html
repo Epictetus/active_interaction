@@ -119,7 +119,7 @@ handles your verbs.</p>
 </ul>
 
 <h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Add it to your Gemfile:</p>
 
@@ -139,7 +139,7 @@ and ActiveModel (4.0 through 4.2).</p>
 <p>If you want to use ActiveInteraction with Ruby &lt; 2.0.0 or ActiveModel &lt; 4.0.0, use ActiveInteraction &lt; 3.0.0.</p>
 
 <h2>
-<a id="basic-usage" class="anchor" href="#basic-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic usage</h2>
+<a id="basic-usage" class="anchor" href="#basic-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basic usage</h2>
 
 <p>To define an interaction, create a subclass of <code>ActiveInteraction::Base</code>. Then
 you need to do two things:</p>
@@ -198,7 +198,7 @@ returns the result.</p>
 <span class="pl-c"># =&gt; 4.41</span></pre></div>
 
 <h3>
-<a id="validations" class="anchor" href="#validations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Validations</h3>
+<a id="validations" class="anchor" href="#validations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Validations</h3>
 
 <p>ActiveInteraction type checks your inputs. Often you'll want more than that.
 For instance, you may want an input to be a string with at least one
@@ -220,8 +220,8 @@ interactions.</p>
   <span class="pl-k">end</span>
 <span class="pl-k">end</span></pre></div>
 
-<p>When you run this interaction, two things will happen. First ActiveInteraction
-will type check your inputs. Then ActiveModel will validate them. If both of
+<p>When you run this interaction, two things will happen. <strong>First ActiveInteraction
+will type check your inputs. Then ActiveModel will validate them.</strong> If both of
 those are happy, it will be executed.</p>
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-c1">SayHello</span>.run!(<span class="pl-c1">name:</span> <span class="pl-c1">nil</span>)
@@ -234,7 +234,7 @@ those are happy, it will be executed.</p>
 <span class="pl-c"># =&gt; "Hello, Taylor!"</span></pre></div>
 
 <h2>
-<a id="filters" class="anchor" href="#filters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Filters</h2>
+<a id="filters" class="anchor" href="#filters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Filters</h2>
 
 <p>You can define filters inside an interaction using the appropriate class method.
 Each method has the same signature:</p>
@@ -272,7 +272,7 @@ Rails, so <code>"1"</code> can be interpreted as the boolean value <code>true</c
 <code>"1"</code>, or the number <code>1</code>.</p>
 
 <h3>
-<a id="array" class="anchor" href="#array" aria-hidden="true"><span class="octicon octicon-link"></span></a>Array</h3>
+<a id="array" class="anchor" href="#array" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Array</h3>
 
 <p>In addition to accepting arrays, array inputs will convert
 <code>ActiveRecord::Relation</code>s into arrays.</p>
@@ -304,7 +304,7 @@ have a name.</p>
 <span class="pl-k">end</span></pre></div>
 
 <h3>
-<a id="boolean" class="anchor" href="#boolean" aria-hidden="true"><span class="octicon octicon-link"></span></a>Boolean</h3>
+<a id="boolean" class="anchor" href="#boolean" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Boolean</h3>
 
 <p>Boolean filters convert the strings <code>"1"</code> and <code>"true"</code> (case-insensitive) into
 <code>true</code>. They also convert <code>"0"</code> and <code>"false"</code> into <code>false</code>.</p>
@@ -323,7 +323,7 @@ have a name.</p>
 <span class="pl-c"># =&gt; "Oh yeah!"</span></pre></div>
 
 <h3>
-<a id="file" class="anchor" href="#file" aria-hidden="true"><span class="octicon octicon-link"></span></a>File</h3>
+<a id="file" class="anchor" href="#file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>File</h3>
 
 <p>File filters also accept <code>TempFile</code>s and anything that responds to <code>#rewind</code>.
 That means that you can pass the <code>params</code> from uploading files via forms in
@@ -343,7 +343,7 @@ Rails.</p>
 <span class="pl-c"># =&gt; 21563</span></pre></div>
 
 <h3>
-<a id="hash" class="anchor" href="#hash" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hash</h3>
+<a id="hash" class="anchor" href="#hash" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hash</h3>
 
 <p>Hash filters accept hashes. The expected value types are given by passing a
 block and nesting other filters. You can have any number of filters inside a
@@ -390,7 +390,7 @@ this, but it's sometimes necessary.</p>
   <span class="pl-c1">strip:</span> <span class="pl-c1">false</span></pre></div>
 
 <h3>
-<a id="interface" class="anchor" href="#interface" aria-hidden="true"><span class="octicon octicon-link"></span></a>Interface</h3>
+<a id="interface" class="anchor" href="#interface" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Interface</h3>
 
 <p>Interface filters allow you to specify that an object must respond to a certain
 set of methods. This allows you to do duck typing with interactions.</p>
@@ -416,7 +416,7 @@ set of methods. This allows you to do duck typing with interactions.</p>
 <span class="pl-c"># =&gt; "{\"is_json\":true}"</span></pre></div>
 
 <h3>
-<a id="object" class="anchor" href="#object" aria-hidden="true"><span class="octicon octicon-link"></span></a>Object</h3>
+<a id="object" class="anchor" href="#object" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Object</h3>
 
 <p>Object filters allow you to require an instance of a particular class. It
 checks either <code>#is_a?</code> on the instance or <code>.===</code> on the class. Because of that,
@@ -453,7 +453,7 @@ object <span class="pl-c1">:dolly3</span>,
   <span class="pl-c1">class:</span> <span class="pl-c1">:Sheep</span></pre></div>
 
 <h3>
-<a id="string" class="anchor" href="#string" aria-hidden="true"><span class="octicon octicon-link"></span></a>String</h3>
+<a id="string" class="anchor" href="#string" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>String</h3>
 
 <p>String filters define inputs that only accept strings.</p>
 
@@ -477,7 +477,7 @@ object <span class="pl-c1">:dolly3</span>,
   <span class="pl-c1">strip:</span> <span class="pl-c1">true</span></pre></div>
 
 <h3>
-<a id="symbol" class="anchor" href="#symbol" aria-hidden="true"><span class="octicon octicon-link"></span></a>Symbol</h3>
+<a id="symbol" class="anchor" href="#symbol" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Symbol</h3>
 
 <p>Symbol filters define inputs that accept symbols. Strings will be converted
 into symbols.</p>
@@ -496,7 +496,7 @@ into symbols.</p>
 <span class="pl-c"># =&gt; #&lt;Proc:0x007fdc9ba94118&gt;</span></pre></div>
 
 <h3>
-<a id="dates-and-times" class="anchor" href="#dates-and-times" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dates and times</h3>
+<a id="dates-and-times" class="anchor" href="#dates-and-times" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dates and times</h3>
 
 <p>Filters that work with dates and times behave similarly. By default, they all
 convert strings into their expected data types using <code>.parse</code>. If you give the
@@ -504,7 +504,7 @@ convert strings into their expected data types using <code>.parse</code>. If you
 formats won't work with <code>DateTime</code> and <code>Time</code> filters if a time zone is set.</p>
 
 <h4>
-<a id="date" class="anchor" href="#date" aria-hidden="true"><span class="octicon octicon-link"></span></a>Date</h4>
+<a id="date" class="anchor" href="#date" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Date</h4>
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">DateInteraction<span class="pl-e"> &lt; ActiveInteraction::Base</span></span>
   date <span class="pl-c1">:birthday</span>
@@ -523,7 +523,7 @@ formats won't work with <code>DateTime</code> and <code>Time</code> filters if a
   <span class="pl-c1">format:</span> <span class="pl-s"><span class="pl-pds">'</span>%Y-%m-%d<span class="pl-pds">'</span></span></pre></div>
 
 <h4>
-<a id="datetime" class="anchor" href="#datetime" aria-hidden="true"><span class="octicon octicon-link"></span></a>DateTime</h4>
+<a id="datetime" class="anchor" href="#datetime" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DateTime</h4>
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">DateTimeInteraction<span class="pl-e"> &lt; ActiveInteraction::Base</span></span>
   date_time <span class="pl-c1">:now</span>
@@ -542,7 +542,7 @@ formats won't work with <code>DateTime</code> and <code>Time</code> filters if a
   <span class="pl-c1">format:</span> <span class="pl-s"><span class="pl-pds">'</span>%Y-%m-%dT%H:%M:%S<span class="pl-pds">'</span></span></pre></div>
 
 <h4>
-<a id="time" class="anchor" href="#time" aria-hidden="true"><span class="octicon octicon-link"></span></a>Time</h4>
+<a id="time" class="anchor" href="#time" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Time</h4>
 
 <p>In addition to converting strings with <code>.parse</code> (or <code>.strptime</code>), time filters
 convert numbers with <code>.at</code>.</p>
@@ -564,13 +564,13 @@ convert numbers with <code>.at</code>.</p>
   <span class="pl-c1">format:</span> <span class="pl-s"><span class="pl-pds">'</span>%Y-%m-%dT%H:%M:%S<span class="pl-pds">'</span></span></pre></div>
 
 <h3>
-<a id="numbers" class="anchor" href="#numbers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Numbers</h3>
+<a id="numbers" class="anchor" href="#numbers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Numbers</h3>
 
 <p>All numeric filters accept numeric input. They will also convert strings using
 the appropriate method from <code>Kernel</code> (like <code>.Float</code>).</p>
 
 <h4>
-<a id="decimal" class="anchor" href="#decimal" aria-hidden="true"><span class="octicon octicon-link"></span></a>Decimal</h4>
+<a id="decimal" class="anchor" href="#decimal" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Decimal</h4>
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">DecimalInteraction<span class="pl-e"> &lt; ActiveInteraction::Base</span></span>
   decimal <span class="pl-c1">:price</span>
@@ -591,7 +591,7 @@ the appropriate method from <code>Kernel</code> (like <code>.Float</code>).</p>
   <span class="pl-c1">digits:</span> <span class="pl-c1">2</span></pre></div>
 
 <h4>
-<a id="float" class="anchor" href="#float" aria-hidden="true"><span class="octicon octicon-link"></span></a>Float</h4>
+<a id="float" class="anchor" href="#float" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Float</h4>
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">FloatInteraction<span class="pl-e"> &lt; ActiveInteraction::Base</span></span>
   float <span class="pl-c1">:x</span>
@@ -607,7 +607,7 @@ the appropriate method from <code>Kernel</code> (like <code>.Float</code>).</p>
 <span class="pl-c"># =&gt; 4.41</span></pre></div>
 
 <h4>
-<a id="integer" class="anchor" href="#integer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Integer</h4>
+<a id="integer" class="anchor" href="#integer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Integer</h4>
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">IntegerInteraction<span class="pl-e"> &lt; ActiveInteraction::Base</span></span>
   integer <span class="pl-c1">:limit</span>
@@ -623,7 +623,7 @@ the appropriate method from <code>Kernel</code> (like <code>.Float</code>).</p>
 <span class="pl-c"># =&gt; [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</span></pre></div>
 
 <h2>
-<a id="rails" class="anchor" href="#rails" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rails</h2>
+<a id="rails" class="anchor" href="#rails" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Rails</h2>
 
 <p>ActiveInteraction plays nicely with Rails. You can use interactions to handle
 your business logic instead of models or controllers. To see how it all works,
@@ -632,10 +632,10 @@ resourceful actions. For a complete working example, check out <a href="example"
 example Rails application.</p>
 
 <h3>
-<a id="controller" class="anchor" href="#controller" aria-hidden="true"><span class="octicon octicon-link"></span></a>Controller</h3>
+<a id="controller" class="anchor" href="#controller" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Controller</h3>
 
 <h4>
-<a id="index" class="anchor" href="#index" aria-hidden="true"><span class="octicon octicon-link"></span></a>Index</h4>
+<a id="index" class="anchor" href="#index" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Index</h4>
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-c"># GET /accounts</span>
 <span class="pl-k">def</span> <span class="pl-en">index</span>
@@ -653,7 +653,7 @@ writing the interaction.</p>
 <span class="pl-k">end</span></pre></div>
 
 <h4>
-<a id="show" class="anchor" href="#show" aria-hidden="true"><span class="octicon octicon-link"></span></a>Show</h4>
+<a id="show" class="anchor" href="#show" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Show</h4>
 
 <p>Up next is the show action. For this one we'll define a helper method to handle
 raising the correct errors. We have to do this because calling <code>.run!</code> would
@@ -709,7 +709,7 @@ as well as the validity of the outcome.</p>
 have to come from type checking or validation.</p>
 
 <h4>
-<a id="new" class="anchor" href="#new" aria-hidden="true"><span class="octicon octicon-link"></span></a>New</h4>
+<a id="new" class="anchor" href="#new" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>New</h4>
 
 <p>The new action will be a little different than the ones we've looked at so far.
 Instead of calling <code>.run</code> or <code>.run!</code>, it's going to initialize a new
@@ -753,7 +753,7 @@ a convenient way to move errors from one object to another. Read more about it
 in <a href="#errors">the errors section</a>.</p>
 
 <h4>
-<a id="create" class="anchor" href="#create" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create</h4>
+<a id="create" class="anchor" href="#create" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create</h4>
 
 <p>The create action has a lot in common with the new action. Both of them use the
 <code>CreateAccount</code> interaction. And if creating the account fails, this action
@@ -779,7 +779,7 @@ forget about <code>params.require</code> and <code>params.permit</code> because 
 that for you.</p>
 
 <h4>
-<a id="destroy" class="anchor" href="#destroy" aria-hidden="true"><span class="octicon octicon-link"></span></a>Destroy</h4>
+<a id="destroy" class="anchor" href="#destroy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Destroy</h4>
 
 <p>The destroy action will reuse the <code>#find_account!</code> helper method we wrote
 earlier.</p>
@@ -804,7 +804,7 @@ spot.</p>
 <span class="pl-k">end</span></pre></div>
 
 <h4>
-<a id="edit" class="anchor" href="#edit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Edit</h4>
+<a id="edit" class="anchor" href="#edit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Edit</h4>
 
 <p>Just like the destroy action, editing uses the <code>#find_account!</code> helper. Then it
 creates a new interaction instance to use as a form object.</p>
@@ -852,7 +852,7 @@ Skip to <a href="#predicates">the predicates section</a> for more information ab
 <span class="pl-k">end</span></pre></div>
 
 <h4>
-<a id="update" class="anchor" href="#update" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update</h4>
+<a id="update" class="anchor" href="#update" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update</h4>
 
 <p>Hopefully you've gotten the hang of this by now. We'll use <code>#find_account!</code> to
 get the account. Then we'll build up the inputs for <code>UpdateAccount</code>. Then we'll
@@ -873,7 +873,7 @@ edit page.</p>
 <span class="pl-k">end</span></pre></div>
 
 <h3>
-<a id="structure" class="anchor" href="#structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Structure</h3>
+<a id="structure" class="anchor" href="#structure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Structure</h3>
 
 <p>We recommend putting your interactions in <code>app/interactions</code>. It's also very
 helpful to group them by model. That way you can look in
@@ -901,10 +901,10 @@ In order to use this structure add <code>config.autoload_paths += Dir.glob("#{co
 </code></pre>
 
 <h2>
-<a id="advanced-usage" class="anchor" href="#advanced-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Advanced usage</h2>
+<a id="advanced-usage" class="anchor" href="#advanced-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Advanced usage</h2>
 
 <h3>
-<a id="callbacks" class="anchor" href="#callbacks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Callbacks</h3>
+<a id="callbacks" class="anchor" href="#callbacks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Callbacks</h3>
 
 <p>ActiveModel provides a powerful framework for defining callbacks.
 ActiveInteraction hooks into that framework to allow hooking into various parts
@@ -944,7 +944,7 @@ of an interaction's lifecycle.</p>
 You can set <code>before</code>, <code>after</code>, or <code>around</code> on any of them.</p>
 
 <h3>
-<a id="composition" class="anchor" href="#composition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Composition</h3>
+<a id="composition" class="anchor" href="#composition" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Composition</h3>
 
 <p>You can run interactions from within other interactions with <code>#compose</code>. If the
 interaction is successful, it'll return the result (just like if you had called
@@ -985,7 +985,7 @@ with <code>inputs</code>, delegating to another interaction is a piece of cake.<
 errors section</a> for more information about them.</p>
 
 <h3>
-<a id="defaults" class="anchor" href="#defaults" aria-hidden="true"><span class="octicon octicon-link"></span></a>Defaults</h3>
+<a id="defaults" class="anchor" href="#defaults" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Defaults</h3>
 
 <p>The default value for an input can take on many different forms. Setting the
 default to <code>nil</code> makes the input optional. Setting it to some value makes that
@@ -1006,7 +1006,7 @@ time <span class="pl-c1">:c</span>, <span class="pl-c1">default:</span> <span cl
 time <span class="pl-c1">:d</span>, <span class="pl-c1">default:</span> <span class="pl-k">-</span><span class="pl-k">&gt;</span> { c <span class="pl-k">+</span> <span class="pl-c1">10</span> }</pre></div>
 
 <h3>
-<a id="descriptions" class="anchor" href="#descriptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Descriptions</h3>
+<a id="descriptions" class="anchor" href="#descriptions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Descriptions</h3>
 
 <p>Use the <code>desc</code> option to provide human-readable descriptions of filters. You
 should prefer these to comments because they can be used to generate
@@ -1027,7 +1027,7 @@ hash of filters. Each filter has a <code>#desc</code> method that returns the de
 <span class="pl-c"># last_name: your last name</span></pre></div>
 
 <h3>
-<a id="errors" class="anchor" href="#errors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Errors</h3>
+<a id="errors" class="anchor" href="#errors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Errors</h3>
 
 <p>ActiveInteraction provides detailed errors for easier introspection and testing
 of errors. Detailed errors improve on regular errors by adding a symbol that
@@ -1127,7 +1127,7 @@ in a confusing error that claims the input <code>y</code> is required even thoug
 present on the outer interaction.</p>
 
 <h3>
-<a id="forms" class="anchor" href="#forms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Forms</h3>
+<a id="forms" class="anchor" href="#forms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Forms</h3>
 
 <p>The outcome returned by <code>.run</code> can be used in forms as though it were an
 ActiveModel object. You can also create a form object by calling <code>.new</code> on the
@@ -1201,7 +1201,7 @@ these gems. As a result, form fields will automatically use the appropriate
 input type.</p>
 
 <h3>
-<a id="grouped-inputs" class="anchor" href="#grouped-inputs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Grouped inputs</h3>
+<a id="grouped-inputs" class="anchor" href="#grouped-inputs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Grouped inputs</h3>
 
 <p>It can be convenient to apply the same options to a bunch of inputs. One common
 use case is making many inputs optional. Instead of setting <code>default: nil</code> on
@@ -1214,7 +1214,7 @@ each one of them, you can use <a href="http://api.rubyonrails.org/classes/Object
 <span class="pl-k">end</span></pre></div>
 
 <h3>
-<a id="optional-inputs" class="anchor" href="#optional-inputs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optional inputs</h3>
+<a id="optional-inputs" class="anchor" href="#optional-inputs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Optional inputs</h3>
 
 <p>Optional inputs can be defined by using the <code>:default</code> option as described in
 <a href="#filters">the filters section</a>. Within the interaction, provided and default values
@@ -1252,7 +1252,7 @@ And if you want to update it, pass in the new value as usual.</p>
 <span class="pl-c1">UpdateUser</span>.run!(<span class="pl-c1">user:</span> user, <span class="pl-c1">birthday:</span> <span class="pl-c1">Date</span>.<span class="pl-k">new</span>(<span class="pl-c1">2000</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>))</pre></div>
 
 <h3>
-<a id="predicates" class="anchor" href="#predicates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Predicates</h3>
+<a id="predicates" class="anchor" href="#predicates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Predicates</h3>
 
 <p>ActiveInteraction creates a predicate method for every input defined by a
 filter. So if you have an input called <code>foo</code>, there will be a predicate method
@@ -1281,7 +1281,7 @@ it was not <code>nil</code>).</p>
 present in the input hash instead of just <code>nil</code>.</p>
 
 <h3>
-<a id="translations" class="anchor" href="#translations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Translations</h3>
+<a id="translations" class="anchor" href="#translations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Translations</h3>
 
 <p>ActiveInteraction is i18n aware out of the box! All you have to do is add
 translations to your project. In Rails, these typically go into
@@ -1328,7 +1328,7 @@ everything out backwards. Simply add translations for ActiveInteraction to your
 <span class="pl-c"># =&gt; ["gnirts dilav a ton si"]</span></pre></div>
 
 <h2>
-<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits</h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Credits</h2>
 
 <p>ActiveInteraction is brought to you by <a href="https://github.com/AaronLasseigne">Aaron Lasseigne</a> and
 <a href="https://github.com/tfausak">Taylor Fausak</a> from <a href="https://github.com/orgsync">OrgSync</a>. We were inspired by the fantastic work done
