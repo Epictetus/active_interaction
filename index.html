@@ -22,12 +22,11 @@
       <p>ActiveInteraction manages application-specific business logic.
 It's an implementation of the command pattern in Ruby.</p>
 
-<p><a href="https://rubygems.org/gems/active_interaction"><img src="https://img.shields.io/gem/v/active_interaction.svg?label=version" alt="Version"></a>
-<a href="https://travis-ci.org/orgsync/active_interaction"><img src="https://img.shields.io/travis/orgsync/active_interaction/master.svg?label=build" alt="Build"></a>
-<a href="https://coveralls.io/r/orgsync/active_interaction"><img src="https://img.shields.io/coveralls/orgsync/active_interaction/master.svg?label=coverage" alt="Coverage"></a>
-<a href="https://codeclimate.com/github/orgsync/active_interaction"><img src="https://img.shields.io/codeclimate/github/orgsync/active_interaction.svg?label=climate" alt="Climate"></a>
-<a href="http://www.libgrader.com/libraries/ruby/active_interaction"><img src="https://img.shields.io/badge/grade-A-brightgreen.svg" alt="Grade"></a>
-<a href="https://gemnasium.com/orgsync/active_interaction"><img src="https://img.shields.io/gemnasium/orgsync/active_interaction.svg?label=dependencies" alt="Dependencies"></a></p>
+<p><a href="https://rubygems.org/gems/active_interaction"><img src="https://badge.fury.io/rb/active_interaction.svg" alt="Version"></a>
+<a href="https://travis-ci.org/orgsync/active_interaction"><img src="https://travis-ci.org/orgsync/active_interaction.svg?branch=master" alt="Build"></a>
+<a href="https://coveralls.io/r/orgsync/active_interaction"><img src="https://coveralls.io/repos/github/orgsync/active_interaction/badge.svg?branch=master" alt="Coverage"></a>
+<a href="https://codeclimate.com/github/orgsync/active_interaction"><img src="https://codeclimate.com/github/orgsync/active_interaction/badges/gpa.svg" alt="Climate"></a>
+<a href="https://gemnasium.com/orgsync/active_interaction"><img src="https://gemnasium.com/orgsync/active_interaction.svg" alt="Dependencies"></a></p>
 
 <hr>
 
@@ -123,20 +122,19 @@ handles your verbs.</p>
 
 <p>Add it to your Gemfile:</p>
 
-<div class="highlight highlight-source-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>active_interaction<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>~&gt; 3.0<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>active_interaction<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>~&gt; 3.2<span class="pl-pds">'</span></span></pre></div>
 
 <p>Or install it manually:</p>
 
-<div class="highlight highlight-source-shell"><pre>$ gem install active_interaction --version <span class="pl-s"><span class="pl-pds">'</span>~&gt; 3.0<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-source-shell"><pre>$ gem install active_interaction --version <span class="pl-s"><span class="pl-pds">'</span>~&gt; 3.2<span class="pl-pds">'</span></span></pre></div>
 
 <p>This project uses <a href="http://semver.org/spec/v2.0.0.html">Semantic Versioning</a>. Check out <a href="CHANGELOG.md">the change log</a> for a
 detailed list of changes. For help upgrading to version 2, please read <a href="http://devblog.orgsync.com/2015/05/06/announcing-active-interaction-2/">the
 announcement post</a>.</p>
 
-<p>ActiveInteraction works with all supported versions of Ruby (2.0 through 2.3)
-and ActiveModel (4.0 through 4.2).</p>
-
-<p>If you want to use ActiveInteraction with Ruby &lt; 2.0.0 or ActiveModel &lt; 4.0.0, use ActiveInteraction &lt; 3.0.0.</p>
+<p>ActiveInteraction works with Ruby 2.0 through 2.3 and ActiveModel 4.0 through
+5.0. If you want to use ActiveInteraction with an older version of Ruby or
+ActiveModel, use ActiveInteraction &lt; 3.0.0.</p>
 
 <h2>
 <a id="basic-usage" class="anchor" href="#basic-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basic usage</h2>
@@ -220,9 +218,9 @@ interactions.</p>
   <span class="pl-k">end</span>
 <span class="pl-k">end</span></pre></div>
 
-<p>When you run this interaction, two things will happen. <strong>First ActiveInteraction
-will type check your inputs. Then ActiveModel will validate them.</strong> If both of
-those are happy, it will be executed.</p>
+<p>When you run this interaction, two things will happen. <strong>First
+ActiveInteraction will type check your inputs. Then ActiveModel will validate
+them.</strong> If both of those are happy, it will be executed.</p>
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-c1">SayHello</span>.run!(<span class="pl-c1">name:</span> <span class="pl-c1">nil</span>)
 <span class="pl-c"># ActiveInteraction::InvalidInteractionError: Name is required</span>
@@ -236,8 +234,8 @@ those are happy, it will be executed.</p>
 <h2>
 <a id="filters" class="anchor" href="#filters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Filters</h2>
 
-<p>You can define filters inside an interaction using the appropriate class method.
-Each method has the same signature:</p>
+<p>You can define filters inside an interaction using the appropriate class
+method. Each method has the same signature:</p>
 
 <ul>
 <li><p>Some symbolic names. These are the attributes to create.</p></li>
@@ -245,7 +243,7 @@ Each method has the same signature:</p>
 <p>An optional hash of options. Each filter supports at least these two options:</p>
 
 <ul>
-<li><p><code>default</code> is the fallback value to use if <code>nil</code> is give. To make a filter
+<li><p><code>default</code> is the fallback value to use if <code>nil</code> is given. To make a filter
 optional, set <code>default: nil</code>.</p></li>
 <li><p><code>desc</code> is a human-readable description of the input. This can be useful for
 generating documentation. For more information about this, read <a href="#descriptions">the
@@ -266,7 +264,7 @@ example filter").</p>
     <span class="pl-c"># Some filters support sub-filters here.</span>
   <span class="pl-k">end</span></pre></div>
 
-<p>In general, filters accept values of the type the correspond to, plus a few
+<p>In general, filters accept values of the type they correspond to, plus a few
 alternatives that can be reasonably coerced. Typically the coercions come from
 Rails, so <code>"1"</code> can be interpreted as the boolean value <code>true</code>, the string
 <code>"1"</code>, or the number <code>1</code>.</p>
@@ -877,8 +875,10 @@ edit page.</p>
 
 <p>We recommend putting your interactions in <code>app/interactions</code>. It's also very
 helpful to group them by model. That way you can look in
-<code>app/interactions/accounts</code> for all the ways you can interact with accounts.
-In order to use this structure add <code>config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")</code> in your <code>application.rb</code></p>
+<code>app/interactions/accounts</code> for all the ways you can interact with accounts. In
+order to use this structure add
+<code>config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")</code> in
+your <code>application.rb</code></p>
 
 <pre><code>- app/
   - controllers/
@@ -1276,6 +1276,11 @@ it was not <code>nil</code>).</p>
 <span class="pl-c"># =&gt; "Howdy, stranger!"</span>
 <span class="pl-c1">SayHello</span>.run!(<span class="pl-c1">name:</span> <span class="pl-s"><span class="pl-pds">'</span>Taylor<span class="pl-pds">'</span></span>)
 <span class="pl-c"># =&gt; "Hello, Taylor!"</span></pre></div>
+
+<p>This can be confusing for boolean inputs. If you have some boolean input <code>foo</code>,
+then the actual value of that input is available through <code>foo</code>. The associated
+predicate method, <code>#foo?</code>, will tell you if that value is not <code>nil</code>. So it will
+only be <code>false</code> if the input is optional and happens to be <code>nil</code>.</p>
 
 <p>See <a href="#optional-inputs">the optional inputs section</a> for help on determining if an input was
 present in the input hash instead of just <code>nil</code>.</p>
