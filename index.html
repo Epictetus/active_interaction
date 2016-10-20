@@ -19,7 +19,11 @@
     </section>
 
     <section class="main-content">
-      <p>ActiveInteraction manages application-specific business logic.
+      <h1>
+<a id="activeinteraction" class="anchor" href="#activeinteraction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://github.com/orgsync/active_interaction">ActiveInteraction</a>
+</h1>
+
+<p>ActiveInteraction manages application-specific business logic.
 It's an implementation of the command pattern in Ruby.</p>
 
 <p><a href="https://rubygems.org/gems/active_interaction"><img src="https://badge.fury.io/rb/active_interaction.svg" alt="Version"></a>
@@ -122,11 +126,11 @@ handles your verbs.</p>
 
 <p>Add it to your Gemfile:</p>
 
-<div class="highlight highlight-source-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>active_interaction<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>~&gt; 3.2<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>active_interaction<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>~&gt; 3.4<span class="pl-pds">'</span></span></pre></div>
 
 <p>Or install it manually:</p>
 
-<div class="highlight highlight-source-shell"><pre>$ gem install active_interaction --version <span class="pl-s"><span class="pl-pds">'</span>~&gt; 3.2<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-source-shell"><pre>$ gem install active_interaction --version <span class="pl-s"><span class="pl-pds">'</span>~&gt; 3.4<span class="pl-pds">'</span></span></pre></div>
 
 <p>This project uses <a href="http://semver.org/spec/v2.0.0.html">Semantic Versioning</a>. Check out <a href="CHANGELOG.md">the change log</a> for a
 detailed list of changes. For help upgrading to version 2, please read <a href="http://devblog.orgsync.com/2015/05/06/announcing-active-interaction-2/">the
@@ -619,6 +623,25 @@ the appropriate method from <code>Kernel</code> (like <code>.Float</code>).</p>
 <span class="pl-c"># ActiveInteraction::InvalidInteractionError: Limit is not a valid integer</span>
 <span class="pl-c1">IntegerInteraction</span>.run!(<span class="pl-c1">limit:</span> <span class="pl-c1">10</span>)
 <span class="pl-c"># =&gt; [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</span></pre></div>
+
+<p>When a <code>String</code> is passed into an <code>integer</code> input, the value will be coerced.
+Coercion is based on <code>Kernel#Integer</code> which attempts to detect the base being used.
+However, you may want to specify the <code>base</code> for the conversion to something more
+sensible (e.g. <code>base: 10</code>).</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">class</span> <span class="pl-en">IntegerInteraction<span class="pl-e"> &lt; ActiveInteraction::Base</span></span>
+  integer <span class="pl-c1">:limit1</span>, <span class="pl-c1">base:</span> <span class="pl-c1">10</span>
+  integer <span class="pl-c1">:limit2</span>
+
+  <span class="pl-k">def</span> <span class="pl-en">execute</span>
+    [limit1, limit2]
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span>
+
+<span class="pl-c1">IntegerInteraction</span>.run!(<span class="pl-c1">limit1:</span> <span class="pl-s"><span class="pl-pds">"</span>08<span class="pl-pds">"</span></span>, <span class="pl-c1">limit2:</span> <span class="pl-c1">8</span>)
+<span class="pl-c"># =&gt; [8, 8]</span>
+<span class="pl-c1">IntegerInteraction</span>.run!(<span class="pl-c1">limit1:</span> <span class="pl-s"><span class="pl-pds">"</span>08<span class="pl-pds">"</span></span>, <span class="pl-c1">limit2:</span> <span class="pl-s"><span class="pl-pds">"</span>08<span class="pl-pds">"</span></span>)
+<span class="pl-c"># ArgumentError: invalid value for Integer(): "08"</span></pre></div>
 
 <h2>
 <a id="rails" class="anchor" href="#rails" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Rails</h2>
